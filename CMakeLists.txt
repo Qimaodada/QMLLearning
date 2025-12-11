@@ -3,9 +3,13 @@ cmake_minimum_required(VERSION 3.16)
 project(QMLLearning VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+
+file(GLOB_RECURSE ALL_TARGET_SOURCE_FILES CONFIGURE_DEPENDS "*.h" "*.cpp" "*.qml")
 
 qt_add_executable(appQMLLearning
     main.cpp
@@ -14,7 +18,13 @@ qt_add_executable(appQMLLearning
 qt_add_qml_module(appQMLLearning
     URI QMLLearning
     VERSION 1.0
-    QML_FILES main.qml 
+    SOURCES
+        enum_defines.h
+    QML_FILES
+        main.qml
+        AppNavi.qml
+        AppContent.qml
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
